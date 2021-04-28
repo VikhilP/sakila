@@ -1,10 +1,36 @@
-SELECT * FROM actor;
-SELECT last_name FROM actor where first_name = "John";
-SELECT * FROM actor WHERE last_name = "Neeson";
-SELECT * FROM actor where actor_id%10 = 0;
-SELECT description FROM film WHERE film_id=100;
-SELECT title FROM film WHERE rating = "R";
-SELECT title FROM film WHERE rating != "R";
-SELECT title, length FROM film ORDER BY length LIMIT 10;
-SELECT title, length FROM film WHERE length IN(SELECT MAX(length) FROM film);
-SELECT title, special_features FROM film WHERE special_features = "Deleted Scenes";
+01) SELECT * FROM actor;
+02) SELECT last_name FROM actor where first_name = "John";
+03) SELECT * FROM actor WHERE last_name = "Neeson";
+04) SELECT * FROM actor where actor_id%10 = 0;
+05) SELECT description FROM film WHERE film_id=100;
+06) SELECT title FROM film WHERE rating = "R";
+07) SELECT title FROM film WHERE rating != "R";
+08) SELECT title, length FROM film ORDER BY length LIMIT 10;
+09) SELECT title, length FROM film WHERE length IN(SELECT MAX(length) FROM film);
+10) SELECT title, special_features FROM film WHERE special_features = "Deleted Scenes";
+11) SELECT last_name, COUNT(last_name) FROM actor GROUP BY last_name HAVING COUNT(last_name)<2 ORDER BY last_name DESC;
+12) SELECT last_name, COUNT(last_name) as freq FROM actor GROUP BY last_name HAVING COUNT(last_name)>1 ORDER BY freq DESC;
+13) SELECT t1.actor_id, t2.first_name, t2.last_name, COUNT(t1.film_id) as film_count
+FROM film_actor t1
+JOIN actor_info t2
+ON t1.actor_id=t2.actor_id
+GROUP BY actor_id
+ORDER BY film_count DESC LIMIT 1;
+14) SELECT release_year FROM film WHERE title="Academy Dinosaur";
+15) SELECT AVG(length) FROM film;
+16) SELECT fc.category_id, c.name, AVG(f.length)
+FROM film_category fc
+JOIN film f
+ON fc.film_id = f.film_id
+JOIN category c
+ON c.category_id=fc.category_id
+GROUP BY fc.category_id;
+17) SELECT title FROM film WHERE description LIKE "%robot%";
+18) SELECT count(release_year) FROM film WHERE release_year = 2010;
+19) SELECT f.title, c.name
+FROM film_category fc
+JOIN film f
+ON fc.film_id = f.film_id
+JOIN category c
+ON c.category_id=fc.category_id
+WHERE c.name = "Horror";
