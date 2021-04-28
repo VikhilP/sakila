@@ -39,10 +39,31 @@ LIMIT 1;
 
 11) select Name, Population, CountryCode from city WHERE CountryCode = "JPN" order by Population DESC limit 5 ;
 
+12) SELECT Name FROM country WHERE HeadOfState = "Elisabeth II"
+
 13) SELECT Name, Population/SurfaceArea FROM country WHERE Population/SurfaceArea > 0 ORDER BY Population/SurfaceArea ASC LIMIT 10;
 
 14) SELECT DISTINCT Language FROM countrylanguage;
 
 15) SELECT Name, GNP FROM country ORDER BY GNP DESC LIMIT 10;
 
-16)
+16) SELECT c.Name, COUNT(cl.Language) AS num_of_languages
+FROM countrylanguage cl
+JOIN country c ON c.Code=cl.CountryCode
+GROUP BY c.Name
+ORDER BY num_of_languages DESC
+LIMIT 10;
+
+17) SELECT c.Name, cl.Percentage
+FROM countrylanguage cl
+JOIN country c ON c.Code=cl.CountryCode
+WHERE cl.Percentage >= 50.0 AND cl.Language = "German"
+ORDER BY cl.Percentage DESC;
+
+18) SELECT Name, LifeExpectancy FROM country WHERE LifeExpectancy > 0
+AND LifeExpectancy IS NOT NULL ORDER BY LifeExpectancy ASC LIMIT 1;
+
+19) SELECT GovernmentForm, COUNT(GovernmentForm) as gf
+FROM country GROUP BY GovernmentForm ORDER BY gf DESC LIMIT 3;
+
+20) SELECT COUNT(IndepYear) as Amount_Of_Indepenceses FROM country WHERE IndepYear IS NOT NULL;
