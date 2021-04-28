@@ -1,0 +1,2 @@
+1) SELECT COUNT(CountryCode) AS US_Cities FROM city WHERE CountryCode = "USA";
+2) SELECT LifeExpectancy FROM country WHERE Name = "Argentina";
