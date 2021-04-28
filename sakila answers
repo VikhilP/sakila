@@ -34,3 +34,25 @@ ON fc.film_id = f.film_id
 JOIN category c
 ON c.category_id=fc.category_id
 WHERE c.name = "Horror";
+20) SELECT CONCAT(first_name," ",last_name) as fullname FROM staff WHERE staff_id = 2;
+21) SELECT CONCAT(a.first_name, " ", a.last_name) as fullname, COUNT(fa.film_id) as filmcount
+FROM film_actor fa
+JOIN actor a
+ON fa.actor_id=a.actor_id
+WHERE a.first_name = "Fred" AND a.last_name = "Costner"
+GROUP BY fullname;
+22) SELECT DISTINCT COUNT(country) FROM country;
+23) SELECT name FROM language ORDER BY name ASC;
+24) SELECT CONCAT(first_name, " ", last_name) AS fullname
+FROM actor
+WHERE last_name LIKE "%son"
+ORDER BY first_name DESC;
+25) SELECT c.name, COUNT(c.name) as number_of_films
+FROM film_category fc
+JOIN film f
+ON fc.film_id = f.film_id
+JOIN category c
+ON c.category_id=fc.category_id
+GROUP BY fc.category_id
+ORDER BY number_of_films DESC
+LIMIT 1;
